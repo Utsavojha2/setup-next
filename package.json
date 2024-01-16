@@ -3,22 +3,43 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "precommit": "lint-staged",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,css,md}\"",
+    "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,css,md}\""
   },
   "dependencies": {
+    "eslint-plugin-prettier": "^5.1.3",
+    "next": "14.0.4",
     "react": "^18",
-    "react-dom": "^18",
-    "next": "14.0.4"
+    "react-dom": "^18"
   },
   "devDependencies": {
-    "typescript": "^5",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
-    "eslint": "^8",
-    "eslint-config-next": "14.0.4"
+    "eslint": "^8.56.0",
+    "eslint-config-next": "14.0.4",
+    "eslint-config-prettier": "^9.1.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.2.0",
+    "prettier": "^3.2.2",
+    "stylelint": "^16.1.0",
+    "typescript": "^5"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run pre-commit -- --debug"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,css,md}": [
+      "eslint --fix",
+      "prettier --write",
+      "git add"
+    ]
   }
 }
